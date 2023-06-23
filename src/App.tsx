@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { Header } from "./components/provider.components";
+import { StyledApp, StyledForm } from "./App.style";
 
 function App() {
+  const handleSubmit = () => {};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <StyledApp>
+      <Header />
+      <StyledForm onSubmit={handleSubmit}></StyledForm>
+      {/* <form
+          action="http://localhost:8000/server.php"
+          method="post"
+          onSubmit={(event) => handleSubmit(event)}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <label htmlFor="name">Name: </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            onChange={(event) => handleChange(event)}
+          />
+          <br />
+          <button type="submit">Submit</button>
+        </form> */}
+      {/* <h1>{result}</h1> */}
+    </StyledApp>
   );
 }
 
