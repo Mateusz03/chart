@@ -1,3 +1,5 @@
-import Header from "./Header/Header";
+import CreateCanal from "./CreateCanal/CreateCanal.component";
+import Chart from "./Chart/Chart";
+import CanalsTable from "./CanalsTable/CanalsTable";
 
-export { Header };
+export { CreateCanal, Chart, CanalsTable };

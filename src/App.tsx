@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { Header } from "./components/provider.components";
-import { StyledApp, StyledForm } from "./App.style";
+import React, { useState, useEffect } from "react";
+import {
+  CreateCanal,
+  Chart,
+  CanalsTable,
+} from "./components/provider.components";
+import { StyledApp } from "./App.style";
+import { DataInterface, DataContext } from "./contexts/Data.context";
+import ReadItem from "./connections/ReadItem.connection";
 
-function App() {
-  const handleSubmit = () => {};
+const App = () => {
+  const [data, setData] = useState<DataInterface[]>([
+    { canal: "Canal", qty: "qty" },
+  ]);
+
+  useEffect(() => {
+    (async () => {
+      const itemsData = await ReadItem();
+      setData([...data, ...itemsData]);
+    })();
+  }, []);
 
   return (
     <StyledApp>
-      <Header />
-      <StyledForm onSubmit={handleSubmit}></StyledForm>
-      {/* <form
-          action="http://localhost:8000/server.php"
-          method="post"
-          onSubmit={(event) => handleSubmit(event)}
-        >
-          <label htmlFor="name">Name: </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={(event) => handleChange(event)}
-          />
-          <br />
-          <button type="submit">Submit</button>
-        </form> */}
-      {/* <h1>{result}</h1> */}
+      <DataContext.Provider value={{ data, setData }}>
+        <CreateCanal />
+        <CanalsTable />
+        <Chart />
+      </DataContext.Provider>
     </StyledApp>
   );
-}
+};
 
 export default App;
